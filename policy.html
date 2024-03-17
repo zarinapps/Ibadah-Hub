@@ -113,43 +113,188 @@
         <p>If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us.</p>
         <p>Email Us: <a href="mailto:Ibadah@zarin.solutions"
                 target="_blank">Ibadah@zarin.solutions</a></p>
-				<script>
-                var url = 'https://anas.zarin.solutions/wa.js';
-                var s = document.createElement('script');
-                s.type = 'text/javascript';
-                s.async = true;
-                s.src = url;
-                var options = {
-                "enabled":true,
-                "chatButtonSetting":{
-                    "backgroundColor":"#00e785",
-                    "ctaText":"Whatsapp Support",
-                    "borderRadius":"25",
-                    "marginLeft": "0",
-                    "marginRight": "20",
-                    "marginBottom": "20",
-                    "ctaIconWATI":false,
-                    "position":"right"
-                },
-                "brandSetting":{
-                    "brandName":"Anas",
-                    "brandSubTitle":"undefined",
-                    "brandImg":"https://anas.zarin.solutions/assets/images/me2.webp",
-                    "welcomeText":"Hi there!\nHow can I help you?",
-                    "messageText":"Hello, ",
-                    "backgroundColor":"#00e785",
-                    "ctaText":"Whatsapp Support",
-                    "borderRadius":"25",
-                    "autoShow":false,
-                    "phoneNumber":"923051766663"
-                }
-                };
-                s.onload = function() {
-                    CreateWhatsappChatWidget(options);
-                };
-                var x = document.getElementsByTagName('script')[0];
-                x.parentNode.insertBefore(s, x);
-            </script>
+ <script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Create popup widget
+    var popupWidget = document.createElement("div");
+    popupWidget.id = "popupWidget";
+    popupWidget.innerHTML = `
+        <span id="closePopup">&times;</span>
+        <h2>Special Offer!</h2>
+        <p>Get 70% off on website and mobile app development services!</p>
+        <button id="contactButton">Contact Us</button>
+    `;
+    document.body.appendChild(popupWidget);
+
+    // Style the popup widget
+    var popupStyle = document.createElement("style");
+    popupStyle.innerHTML = `
+        #popupWidget {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(to bottom, #ffffff 0%, #f1f1f1 100%);
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 9999;
+            display: none;
+            animation: pulseBackground 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulseBackground {
+            0% {
+                background-color: #ffffff;
+            }
+            100% {
+                background-color: #f1f1f1;
+            }
+        }
+
+        #popupWidget h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        #popupWidget p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        #popupWidget button {
+            padding: 12px 24px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        #popupWidget button:hover {
+            background-color: #0056b3;
+        }
+
+        #closePopup {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background-color: red;
+            color: white;
+            font-size: 20px;
+            border: 2px solid #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            font-weight: bold;
+        }
+
+        #closePopup:hover {
+            background-color: darkred;
+            border-color: darkred;
+        }
+
+        /* Quick Contact Widget Styles */
+        .quick_contact a {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            right: 18px;
+            color: #fff;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 40px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            transition: transform 0.5s ease;
+        }
+        .qwhtsapp {
+            bottom: 90px;
+            background-color: #25d366;
+        }
+        .qcall {
+            bottom: 160px;
+            background-color: #2196f3;
+        }
+        .quick_contact_icon {
+            margin-top: 10px;
+            animation: blink 1s infinite; /* Adding blinking animation */
+        }
+        .quick_contact a:hover {
+            transform: scale(1.1);
+        }
+        
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+    `;
+    document.head.appendChild(popupStyle);
+
+    // Add event listeners
+    setTimeout(function () {
+        popupWidget.style.display = "block";
+    }, 15000);
+
+    document.getElementById("closePopup").addEventListener("click", function () {
+        popupWidget.style.display = "none";
+    });
+
+    document.getElementById("contactButton").addEventListener("click", function () {
+        window.location.href = "https://anas.zarin.solutions";
+    });
+
+    // Function to add HTML to the page for Quick Contact Widget
+    function addHTML() {
+        const quickContactDiv = document.createElement('div');
+        quickContactDiv.classList.add('quick_contact');
+
+        const whatsappLink = document.createElement('a');
+        whatsappLink.href = 'https://api.whatsapp.com/send?phone=923455917782&text=hello';
+        whatsappLink.classList.add('qwhtsapp');
+        whatsappLink.target = '_blank';
+        whatsappLink.innerHTML = '<i class="fa fa-whatsapp quick_contact_icon"></i>';
+        quickContactDiv.appendChild(whatsappLink);
+
+        const callLink = document.createElement('a');
+        callLink.href = 'tel:+923455917782';
+        callLink.classList.add('qcall');
+        callLink.target = '_blank';
+        callLink.innerHTML = '<i class="fa fa-phone quick_contact_icon"></i>';
+        quickContactDiv.appendChild(callLink);
+
+        document.body.appendChild(quickContactDiv);
+    }
+
+    // Function to load Font Awesome CSS for Quick Contact Widget
+    function loadFontAwesome() {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css';
+        document.head.appendChild(link);
+    }
+
+    // Call functions to add HTML and load Font Awesome for Quick Contact Widget
+    function initQuickContactWidget() {
+        addHTML();
+        loadFontAwesome();
+    }
+
+    // Initialize the Quick Contact Widget
+    initQuickContactWidget();
+});
+</script>
 </body>
 
 </html>
